@@ -1,0 +1,295 @@
+/* ===========================================
+   Digital Entropy Tarot - Design System
+   =========================================== */
+
+/* --- CSS Variables (Design Tokens) --- */
+:root {
+    --color-bg-primary: #0f172a;
+    --color-bg-secondary: #1e293b;
+    --color-bg-tertiary: #334155;
+    
+    --color-text-primary: #e2e8f0;
+    --color-text-secondary: #94a3b8;
+    --color-text-muted: #64748b;
+    
+    --color-accent-amber: #fbbf24;
+    --color-accent-purple: #a855f7;
+    --color-accent-gold: #f59e0b;
+    
+    --color-major-arcana: #7c3aed;
+    --color-wands: #b91c1c;
+    --color-cups: #0369a1;
+    --color-swords: #ca8a04;
+    --color-pentacles: #15803d;
+    
+    --font-serif: 'Cormorant Garamond', serif;
+    --font-sans: 'Noto Sans KR', sans-serif;
+    
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 0 20px rgba(251, 191, 36, 0.3);
+    
+    --transition-flip: 0.8s;
+    --transition-default: 0.3s;
+    
+    --border-radius-sm: 8px;
+    --border-radius-md: 12px;
+    --border-radius-lg: 16px;
+    --border-radius-xl: 24px;
+}
+
+/* --- Base Styles --- */
+body {
+    font-family: var(--font-sans);
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+.serif {
+    font-family: var(--font-serif);
+}
+
+/* --- Entropy Canvas --- */
+#entropy-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* --- Card System --- */
+.card-container {
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform var(--transition-flip);
+    transform-style: preserve-3d;
+    box-shadow: var(--shadow-card);
+    border-radius: var(--border-radius-md);
+}
+
+.card-container.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: var(--border-radius-md);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-back {
+    background: var(--color-bg-secondary);
+    background-image: 
+        radial-gradient(var(--color-bg-tertiary) 1px, transparent 1px),
+        linear-gradient(45deg, transparent 48%, var(--color-accent-purple) 49%, var(--color-accent-purple) 51%, transparent 52%);
+    background-size: 10px 10px, 40px 40px;
+    border: 2px solid var(--color-text-secondary);
+}
+
+.card-front {
+    background-color: #f8fafc;
+    color: var(--color-bg-secondary);
+    transform: rotateY(180deg);
+    border: 4px solid;
+    overflow: hidden;
+}
+
+/* Suit Colors */
+.major-arcana { border-color: var(--color-major-arcana); }
+.wands { border-color: var(--color-wands); }
+.cups { border-color: var(--color-cups); }
+.swords { border-color: var(--color-swords); }
+.pentacles { border-color: var(--color-pentacles); }
+
+.reversed {
+    transform: rotateY(180deg) rotate(180deg);
+}
+
+/* --- Entropy Bar --- */
+.entropy-bar-container {
+    width: 100%;
+    background: var(--color-bg-tertiary);
+    border-radius: 9999px;
+    height: 16px;
+    overflow: hidden;
+}
+
+.entropy-bar-fill {
+    height: 100%;
+    border-radius: 9999px;
+    background: linear-gradient(90deg, var(--color-accent-purple), var(--color-accent-amber));
+    transition: width 0.2s ease-out;
+    position: relative;
+}
+
+.entropy-bar-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255,255,255,0.3) 50%,
+        transparent 100%
+    );
+    animation: shimmer 1.5s infinite;
+}
+
+/* --- Animations --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 10px rgba(251, 191, 36, 0.3); }
+    50% { box-shadow: 0 0 30px rgba(251, 191, 36, 0.6); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease-out;
+}
+
+.pulse-glow {
+    animation: pulse-glow 2s infinite;
+}
+
+.float {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* --- Utility Classes --- */
+.glass-panel {
+    background: rgba(30, 41, 59, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--color-bg-tertiary);
+    border-radius: var(--border-radius-xl);
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, var(--color-accent-purple), var(--color-accent-amber));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--color-accent-gold), var(--color-accent-purple));
+    color: white;
+    font-weight: bold;
+    padding: 12px 32px;
+    border-radius: 9999px;
+    border: none;
+    cursor: pointer;
+    transition: transform var(--transition-default), box-shadow var(--transition-default);
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-glow);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--color-text-secondary);
+    padding: 8px 24px;
+    border: 1px solid var(--color-bg-tertiary);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: background var(--transition-default);
+}
+
+.btn-secondary:hover {
+    background: var(--color-bg-tertiary);
+}
+
+.btn-copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 9999px;
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-default);
+}
+
+.btn-copy:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+}
+
+.btn-copy.copied {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+/* --- Spread Selection Cards --- */
+.spread-card {
+    padding: 16px;
+    border-radius: var(--border-radius-md);
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--color-bg-tertiary);
+    cursor: pointer;
+    transition: all var(--transition-default);
+}
+
+.spread-card:hover {
+    background: rgba(100, 116, 139, 0.3);
+    transform: scale(1.03);
+    border-color: var(--color-accent-amber);
+}
+
+/* --- Reading Result Styles --- */
+.reading-card {
+    border-left: 4px solid var(--color-accent-amber);
+    padding-left: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.reading-card.reversed {
+    border-left-color: var(--color-text-secondary);
+    transform: none;
+}
+
+.reading-advice {
+    background: rgba(100, 116, 139, 0.2);
+    padding: 24px;
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--color-bg-tertiary);
+}

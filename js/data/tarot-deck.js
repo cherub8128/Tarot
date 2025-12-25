@@ -1,0 +1,184 @@
+/**
+ * Tarot Deck Data Module
+ * Contains all 78 tarot cards with keywords for interpretation
+ * 
+ * @module data/tarot-deck
+ */
+
+// Major Arcana names (22 cards)
+const MAJOR_ARCANA = [
+    "The Fool", "The Magician", "The High Priestess", "The Empress", "The Emperor",
+    "The Hierophant", "The Lovers", "The Chariot", "Strength", "The Hermit",
+    "Wheel of Fortune", "Justice", "The Hanged Man", "Death", "Temperance",
+    "The Devil", "The Tower", "The Star", "The Moon", "The Sun", "Judgement", "The World"
+];
+
+// Minor Arcana suits
+const SUITS = ['Wands', 'Cups', 'Swords', 'Pentacles'];
+
+// Ranks for minor arcana
+const RANKS = ['Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Page', 'Knight', 'Queen', 'King'];
+
+/**
+ * Card interpretation keywords
+ * @type {Object.<string, {up: string, rev: string}>}
+ */
+const KEYWORDS = {
+    // Major Arcana
+    "The Fool": { up: "새로운 시작, 순수, 모험, 무한한 가능성", rev: "무모함, 위험 감수, 어리석음, 경솔함" },
+    "The Magician": { up: "창조력, 기술, 의지력, 자원 활용", rev: "속임수, 재능 낭비, 소통 부족, 조작" },
+    "The High Priestess": { up: "직관, 신비, 내면의 지혜, 잠재의식", rev: "비밀 드러남, 내면 무시, 차가움, 표면적 지식" },
+    "The Empress": { up: "풍요, 모성, 자연, 예술적 창조", rev: "의존, 창조력 고갈, 사치, 과잉보호" },
+    "The Emperor": { up: "권위, 구조, 아버지, 리더십, 안정", rev: "폭정, 경직됨, 규율 부족, 지배욕" },
+    "The Hierophant": { up: "전통, 영적 지도, 배움, 도덕적 가치", rev: "반항, 낡은 관습, 개인적 믿음, 비정통" },
+    "The Lovers": { up: "사랑, 조화, 가치관의 선택, 결합", rev: "불화, 잘못된 선택, 균형 깨짐, 유혹" },
+    "The Chariot": { up: "성공, 결단력, 통제, 승리, 전진", rev: "통제 상실, 방향 상실, 패배감, 공격성" },
+    "Strength": { up: "용기, 인내, 내면의 힘, 자기 통제", rev: "자기 의심, 나약함, 불안, 자신감 부족" },
+    "The Hermit": { up: "성찰, 고독, 내면 탐구, 지혜 추구", rev: "고립, 외로움, 현실 도피, 편집증" },
+    "Wheel of Fortune": { up: "운명, 변화, 행운, 주기, 전환점", rev: "불운, 저항, 통제 불가능, 하강 국면" },
+    "Justice": { up: "정의, 공정, 진실, 인과응보, 균형", rev: "불공정, 편견, 책임 회피, 부정직" },
+    "The Hanged Man": { up: "희생, 새로운 관점, 일시 정지, 해방", rev: "무의미한 희생, 정체, 저항, 이기심" },
+    "Death": { up: "끝, 변화, 새로운 시작, 변형, 해방", rev: "변화 거부, 정체, 두려움, 집착" },
+    "Temperance": { up: "균형, 절제, 인내, 조화, 치유", rev: "불균형, 과도함, 성급함, 갈등" },
+    "The Devil": { up: "속박, 중독, 물질주의, 그림자 자아", rev: "해방, 사슬 끊기, 각성, 자유" },
+    "The Tower": { up: "갑작스런 변화, 붕괴, 계시, 자유", rev: "변화에 대한 두려움, 재난 회피, 지연된 붕괴" },
+    "The Star": { up: "희망, 영감, 평온, 치유, 재생", rev: "절망, 믿음 상실, 낙담, 단절" },
+    "The Moon": { up: "환상, 불안, 잠재의식, 직감", rev: "혼란 해소, 공포 극복, 진실 발견, 명료" },
+    "The Sun": { up: "성공, 기쁨, 긍정, 활력, 명확함", rev: "일시적 우울, 성공 지연, 허영, 과신" },
+    "Judgement": { up: "부활, 심판, 각성, 소명, 결정", rev: "자기 비판, 후회, 무시, 부정" },
+    "The World": { up: "완성, 성취, 여행, 통합, 완전함", rev: "미완성, 지연, 부족함, 마무리 실패" },
+    
+    // Suit keywords (for minor arcana generation)
+    "Wands": { up: "열정, 행동, 창조, 영감, 의지", rev: "지연, 무기력, 갈등, 성급함" },
+    "Cups": { up: "감정, 관계, 사랑, 직관, 치유", rev: "감정 과잉, 실망, 단절, 억압" },
+    "Swords": { up: "지성, 사고, 진실, 명확함, 결단", rev: "혼란, 잔인함, 스트레스, 갈등" },
+    "Pentacles": { up: "물질, 현실, 금전, 건강, 성장", rev: "손실, 탐욕, 불안정, 게으름" }
+};
+
+/**
+ * Spread definitions with position meanings
+ */
+export const SPREADS = {
+    daily: {
+        name: "오늘의 운세",
+        cardCount: 1,
+        positions: ["오늘의 메시지"]
+    },
+    three: {
+        name: "과거/현재/미래",
+        cardCount: 3,
+        positions: ["과거 (The Past)", "현재 (The Present)", "미래 (The Future)"]
+    },
+    choice: {
+        name: "양자택일",
+        cardCount: 2,
+        positions: ["선택 A의 흐름", "선택 B의 흐름"]
+    },
+    love: {
+        name: "연애의 온도",
+        cardCount: 4,
+        positions: [
+            "나의 마음 (My Feelings)",
+            "상대방의 마음 (Their Feelings)",
+            "현재 관계의 상황 (Current Situation)",
+            "관계의 미래/조언 (Outcome/Advice)"
+        ]
+    },
+    mbs: {
+        name: "마음/몸/영혼",
+        cardCount: 3,
+        positions: ["마음 (Mind - 정신적 상태)", "몸 (Body - 현실/물질)", "영혼 (Spirit - 내면/교훈)"]
+    },
+    celtic: {
+        name: "켈트 십자가",
+        cardCount: 10,
+        positions: [
+            "1. 현재 상황 (The Present)",
+            "2. 방해물/도전 (The Challenge)",
+            "3. 과거의 원인 (The Past)",
+            "4. 가까운 미래 (The Future)",
+            "5. 의식적 목표 (Conscious Goal)",
+            "6. 무의식적 영향 (Subconscious)",
+            "7. 당신의 태도 (Your Attitude)",
+            "8. 외부 환경 (Environment)",
+            "9. 희망과 두려움 (Hopes & Fears)",
+            "10. 최종 결과 (Final Outcome)"
+        ]
+    }
+};
+
+/**
+ * Generate the full 78-card deck
+ * @returns {Array<Object>} Array of card objects
+ */
+export function createDeck() {
+    const deck = [];
+    
+    // Add Major Arcana (22 cards)
+    MAJOR_ARCANA.forEach((name, index) => {
+        deck.push({
+            id: `major_${index}`,
+            name,
+            type: 'major',
+            suit: null,
+            number: index,
+            keywords: KEYWORDS[name]
+        });
+    });
+    
+    // Add Minor Arcana (56 cards)
+    SUITS.forEach(suit => {
+        RANKS.forEach((rank, index) => {
+            const suitKeywords = KEYWORDS[suit];
+            deck.push({
+                id: `${suit.toLowerCase()}_${index + 1}`,
+                name: `${rank} of ${suit}`,
+                type: 'minor',
+                suit,
+                number: index + 1,
+                keywords: {
+                    up: `${suitKeywords.up}과 연결된 ${rank}의 에너지`,
+                    rev: `${suitKeywords.rev}과 관련된 ${rank}의 측면`
+                }
+            });
+        });
+    });
+    
+    return deck;
+}
+
+/**
+ * Get card icon based on suit/type
+ * @param {Object} card - Card object
+ * @returns {string} HTML icon string
+ */
+export function getCardIcon(card) {
+    if (card.type === 'major') {
+        return '<i class="fas fa-star text-purple-600"></i>';
+    }
+    
+    const icons = {
+        Wands: '<i class="fas fa-fire text-red-700"></i>',
+        Cups: '<i class="fas fa-wine-glass text-blue-700"></i>',
+        Swords: '<i class="fas fa-wind text-yellow-700"></i>',
+        Pentacles: '<i class="fas fa-coins text-green-700"></i>'
+    };
+    
+    return icons[card.suit] || '';
+}
+
+/**
+ * Convert number to Roman numerals
+ * @param {number} num - Number to convert
+ * @returns {string} Roman numeral string
+ */
+export function toRoman(num) {
+    const roman = { M: 1000, CM: 900, D: 500, CD: 400, C: 100, XC: 90, L: 50, XL: 40, X: 10, IX: 9, V: 5, IV: 4, I: 1 };
+    let str = '';
+    for (const [key, value] of Object.entries(roman)) {
+        const count = Math.floor(num / value);
+        num -= count * value;
+        str += key.repeat(count);
+    }
+    return str;
+}

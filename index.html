@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Entropy Tarot | 디지털 엔트로피 타로</title>
+    <meta name="description" content="당신의 움직임이 운명을 결정합니다. 사용자 행동 기반 엔트로피로 진정한 무작위 타로 리딩을 경험하세요.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="min-h-screen flex flex-col relative">
+
+    <!-- Canvas for Entropy Visuals -->
+    <canvas id="entropy-canvas"></canvas>
+
+    <!-- Main Container -->
+    <div id="main-container"
+        class="relative z-10 w-full max-w-6xl mx-auto p-4 flex-grow flex flex-col items-center justify-center min-h-screen">
+
+        <!-- Header -->
+        <header class="text-center mb-8 fade-in">
+            <h1 class="text-4xl md:text-6xl serif font-bold gradient-text mb-2">
+                Digital Entropy Tarot
+            </h1>
+            <p class="text-slate-400 text-sm md:text-base">
+                당신의 움직임이 운명을 결정합니다.
+            </p>
+        </header>
+
+        <!-- Step 1: Mode Selection -->
+        <div id="step-selection" class="w-full max-w-4xl text-center space-y-6 fade-in">
+            <div class="glass-panel p-8">
+                <h2 class="text-2xl serif mb-6 text-amber-100">어떤 조언이 필요하신가요?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Spread options will be dynamically inserted -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Entropy Gathering (The Ritual) -->
+        <div id="step-ritual" class="hidden w-full text-center space-y-6 fade-in">
+            <div class="glass-panel p-8 relative overflow-hidden">
+                <div class="absolute inset-0 border-2 border-amber-500/20 rounded-2xl pulse-glow"></div>
+                <h2 class="text-2xl serif mb-2 text-amber-100">에너지를 모으는 중...</h2>
+                <p class="text-slate-300 mb-6">
+                    마우스를 움직이거나 화면을 터치하여<br>
+                    카드에 당신의 기운을 불어넣으세요.
+                </p>
+
+                <div class="entropy-bar-container mb-4">
+                    <div id="entropy-bar" class="entropy-bar-fill" style="width: 0%"></div>
+                </div>
+                <p id="entropy-text" class="text-xs text-amber-400 font-mono">Entropy: 0%</p>
+
+                <div class="mt-6 text-slate-500 text-xs">
+                    <i class="fas fa-info-circle mr-1"></i>
+                    다양한 움직임이 더 무작위한 결과를 만듭니다
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Card Reveal -->
+        <div id="step-reveal" class="hidden w-full flex-col items-center space-y-8 fade-in">
+            <div id="cards-area" class="flex flex-wrap justify-center gap-4 md:gap-6">
+                <!-- Cards will be dynamically inserted -->
+            </div>
+
+            <button id="reveal-btn" class="btn-primary">
+                <i class="fas fa-eye mr-2"></i>운명 확인하기
+            </button>
+        </div>
+
+        <!-- Step 4: Reading Results -->
+        <div id="step-reading" class="hidden w-full max-w-4xl space-y-6 fade-in pb-12">
+            <!-- Reading display will be dynamically inserted -->
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="relative z-10 text-center py-4 text-slate-600 text-xs">
+        <p>
+            <i class="fas fa-moon mr-1"></i>
+            Powered by User Entropy
+            <span class="mx-2">|</span>
+            <a href="https://github.com" target="_blank" class="hover:text-slate-400 transition-colors">
+                <i class="fab fa-github mr-1"></i>Source
+            </a>
+        </p>
+    </footer>
+
+    <!-- Application Script (ES6 Module) -->
+    <script type="module" src="js/app.js"></script>
+</body>
+
+</html>
