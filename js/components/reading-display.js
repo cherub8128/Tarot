@@ -21,12 +21,8 @@ export function createReadingDisplay(selectedCards, spreadType) {
 
     container.innerHTML = `
         <div class="glass-panel p-6 md:p-10">
-            <div class="flex justify-between items-center mb-8 border-b border-slate-600 pb-4">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 border-b border-slate-600 pb-4">
                 <h2 class="text-3xl serif text-amber-100">리딩 결과</h2>
-                <button id="copy-for-ai" class="btn-copy">
-                    <i class="fas fa-copy"></i>
-                    <span>AI에게 물어보기</span>
-                </button>
             </div>
             
             <div id="reading-cards" class="space-y-8">
@@ -35,6 +31,25 @@ export function createReadingDisplay(selectedCards, spreadType) {
             
             <div id="reading-advice" class="mt-8">
                 <!-- Advice section will be inserted here -->
+            </div>
+            
+            <!-- Question Input Section -->
+            <div class="mt-10 p-6 bg-slate-700/50 rounded-xl border border-slate-600">
+                <h3 class="text-lg font-bold text-purple-300 mb-3">
+                    <i class="fas fa-robot mr-2"></i>AI에게 더 자세히 물어보기
+                </h3>
+                <p class="text-slate-400 text-sm mb-4">질문을 입력하면 타로 결과와 함께 복사됩니다.</p>
+                <div class="flex flex-col gap-3">
+                    <textarea 
+                        id="user-question" 
+                        class="w-full p-4 bg-slate-800 border border-slate-600 rounded-xl text-slate-200 placeholder-slate-500 focus:border-purple-500 focus:outline-none resize-none"
+                        rows="3" 
+                        placeholder="예: 이 상황에서 제가 어떻게 행동해야 할까요? / 연애 운이 좋아지려면 어떻게 해야 하나요?"></textarea>
+                    <button id="copy-for-ai" class="btn-copy self-end">
+                        <i class="fas fa-copy"></i>
+                        <span>결과 복사하기</span>
+                    </button>
+                </div>
             </div>
             
             <div class="mt-12 text-center">
@@ -57,15 +72,18 @@ export function createReadingDisplay(selectedCards, spreadType) {
     const adviceContainer = container.querySelector('#reading-advice');
     adviceContainer.appendChild(createAdvice(spreadType));
 
-    // Setup copy button
+    // Setup copy button with question input
     const copyBtn = container.querySelector('#copy-for-ai');
+    const questionInput = container.querySelector('#user-question');
+
     copyBtn.addEventListener('click', () => {
-        copyForAI(selectedCards, spreadType);
+        const userQuestion = questionInput.value.trim();
+        copyForAI(selectedCards, spreadType, userQuestion);
         copyBtn.classList.add('copied');
         copyBtn.innerHTML = '<i class="fas fa-check"></i><span>복사됨!</span>';
         setTimeout(() => {
             copyBtn.classList.remove('copied');
-            copyBtn.innerHTML = '<i class="fas fa-copy"></i><span>AI에게 물어보기</span>';
+            copyBtn.innerHTML = '<i class="fas fa-copy"></i><span>결과 복사하기</span>';
         }, 2000);
     });
 
@@ -139,11 +157,18 @@ function createAdvice(spreadType) {
  * Copy reading result for AI interpretation
  * @param {Object[]} selectedCards - Array of selected cards
  * @param {string} spreadType - Type of spread
+ * @param {string} userQuestion - User's custom question
  */
-async function copyForAI(selectedCards, spreadType) {
+async function copyForAI(selectedCards, spreadType, userQuestion = '') {
     const spread = SPREADS[spreadType];
 
     let text = `🔮 타로 리딩 결과를 해석해주세요\n\n`;
+
+    // Add user's question if provided
+    if (userQuestion) {
+        text += `❓ 질문: ${userQuestion}\n\n`;
+    }
+
     text += `📋 스프레드: ${spread.name}\n\n`;
     text += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
 
@@ -159,7 +184,12 @@ async function copyForAI(selectedCards, spreadType) {
     });
 
     text += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
-    text += `위 타로 리딩 결과를 바탕으로:\n`;
+
+    if (userQuestion) {
+        text += `위 타로 리딩 결과를 바탕으로 "${userQuestion}"에 대해 답변해주세요.\n\n`;
+    }
+
+    text += `요청사항:\n`;
     text += `1. 각 카드가 해당 위치에서 가지는 의미를 상세히 설명해주세요.\n`;
     text += `2. 카드들 사이의 연결과 전체적인 메시지를 분석해주세요.\n`;
     text += `3. 현실적이고 실천 가능한 조언을 제공해주세요.\n`;
