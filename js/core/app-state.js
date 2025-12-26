@@ -148,13 +148,8 @@ class AppState {
     revealCard() {
         const newCount = this._state.revealedCount + 1;
         this.set({ revealedCount: newCount });
-
-        if (newCount === this._state.selectedCards.length) {
-            setTimeout(() => {
-                this.set({ currentStep: 'reading' });
-            }, 800);
-        }
-
+        // Note: Removed auto-transition to 'reading' step
+        // User must click "해석 보기" button to proceed
         return newCount;
     }
 

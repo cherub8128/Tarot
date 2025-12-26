@@ -1,0 +1,94 @@
+/* ===========================================
+   Entropy UI Components
+   =========================================== */
+
+#entropy-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.entropy-bar-container {
+    width: 100%;
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-full);
+    height: 20px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.entropy-bar-fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+    background: linear-gradient(90deg,
+            var(--color-accent-purple),
+            var(--color-accent-amber),
+            var(--color-accent-rose));
+    background-size: 200% 100%;
+    transition: width 0.2s ease-out;
+    position: relative;
+    animation: gradient-shift 2s ease infinite;
+}
+
+.entropy-bar-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.4) 50%,
+            transparent 100%);
+    animation: shimmer 1.2s infinite;
+}
+
+@keyframes gradient-shift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.entropy-hint {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--color-text-muted);
+    font-size: 0.75rem;
+}
+
+.entropy-stats {
+    display: flex;
+    gap: var(--space-lg);
+    justify-content: center;
+    margin-top: var(--space-md);
+}
+
+.entropy-stat {
+    text-align: center;
+}
+
+.entropy-stat-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-accent-amber);
+    font-family: monospace;
+}
+
+.entropy-stat-label {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+}

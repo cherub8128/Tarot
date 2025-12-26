@@ -1,0 +1,95 @@
+/* ===========================================
+   Button Components
+   =========================================== */
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--color-accent-gold), var(--color-accent-purple));
+    color: white;
+    font-weight: bold;
+    padding: var(--space-md) var(--space-xl);
+    border-radius: var(--radius-full);
+    border: none;
+    cursor: pointer;
+    transition: transform var(--transition-default), box-shadow var(--transition-default);
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-glow);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--color-text-secondary);
+    padding: var(--space-sm) var(--space-lg);
+    border: 1px solid var(--color-bg-tertiary);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background var(--transition-default);
+}
+
+.btn-secondary:hover {
+    background: var(--color-bg-tertiary);
+}
+
+.btn-copy {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: var(--radius-full);
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-default);
+}
+
+.btn-copy:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-glow-purple);
+}
+
+.btn-copy.copied {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+/* Fortune Type Buttons */
+.fortune-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-tertiary);
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all var(--transition-default);
+}
+
+.fortune-btn:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-accent-amber);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.fortune-btn.active {
+    border-color: var(--color-accent-purple);
+    background: rgba(168, 85, 247, 0.2);
+}
+
+.fortune-btn-icon {
+    font-size: 2rem;
+}
+
+.fortune-btn-label {
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.fortune-btn-desc {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}

@@ -27,26 +27,19 @@ export function createCardElement(card, index, isReversed, sizeClass = 'w-32 h-5
     container.innerHTML = `
         <div class="card-inner" id="card-${index}">
             <div class="card-face card-back">
-                <div class="w-16 h-16 border-2 border-amber-500/30 rounded-full flex items-center justify-center">
+                <div class="w-16 h-16 border-2 border-amber-500/30 rounded-full flex items-center justify-center spin-slow">
                     <i class="fas fa-moon text-2xl text-amber-500/50"></i>
                 </div>
             </div>
             <div class="card-face card-front ${suitClass}">
-                <div class="h-full w-full flex flex-col justify-between p-2 md:p-4 bg-slate-100 relative">
-                    <div class="text-[10px] md:text-sm font-bold uppercase tracking-widest text-center text-slate-500">
-                        ${topLabel}
-                    </div>
-                    <div class="text-center flex-grow flex flex-col justify-center">
-                        <div class="text-2xl md:text-4xl mb-2 opacity-80">
-                            ${getCardIcon(card)}
-                        </div>
-                        <h3 class="font-serif font-bold text-xs md:text-lg leading-tight text-slate-800">
-                            ${card.name}
-                        </h3>
-                    </div>
-                    <div class="text-center">
-                        <span class="text-[8px] md:text-[10px] font-semibold px-2 py-1 rounded-full ${isReversed ? 'bg-slate-800 text-white' : 'bg-slate-200 text-slate-600'}">
-                            ${isReversed ? 'Reversed' : 'Upright'}
+                <img src="${card.image}" alt="${card.name}" class="w-full h-full object-cover" loading="lazy">
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
+                    <h3 class="font-serif font-bold text-xs md:text-sm text-white text-center leading-tight">
+                        ${card.name}
+                    </h3>
+                    <div class="text-center mt-1">
+                        <span class="text-[8px] md:text-[10px] font-semibold px-2 py-0.5 rounded-full ${isReversed ? 'bg-rose-600 text-white' : 'bg-amber-500 text-black'}">
+                            ${isReversed ? '역방향' : '정방향'}
                         </span>
                     </div>
                 </div>

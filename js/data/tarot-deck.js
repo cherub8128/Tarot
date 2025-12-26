@@ -20,6 +20,58 @@ const SUITS = ['Wands', 'Cups', 'Swords', 'Pentacles'];
 const RANKS = ['Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Page', 'Knight', 'Queen', 'King'];
 
 /**
+ * Image path mapping for cards
+ */
+const IMAGE_PATHS = {
+    // Major Arcana
+    major: [
+        'RWS_Tarot_00_Fool.jpg',
+        'RWS_Tarot_01_Magician.jpg',
+        'RWS_Tarot_02_High_Priestess.jpg',
+        'RWS_Tarot_03_Empress.jpg',
+        'RWS_Tarot_04_Emperor.jpg',
+        'RWS_Tarot_05_Hierophant.jpg',
+        'RWS_Tarot_06_Lovers.jpg',
+        'RWS_Tarot_07_Chariot.jpg',
+        'RWS_Tarot_08_Strength.jpg',
+        'RWS_Tarot_09_Hermit.jpg',
+        'RWS_Tarot_10_Wheel_of_Fortune.jpg',
+        'RWS_Tarot_11_Justice.jpg',
+        'RWS_Tarot_12_Hanged_Man.jpg',
+        'RWS_Tarot_13_Death.jpg',
+        'RWS_Tarot_14_Temperance.jpg',
+        'RWS_Tarot_15_Devil.jpg',
+        'RWS_Tarot_16_Tower.jpg',
+        'RWS_Tarot_17_Star.jpg',
+        'RWS_Tarot_18_Moon.jpg',
+        'RWS_Tarot_19_Sun.jpg',
+        'RWS_Tarot_20_Judgement.jpg',
+        'RWS_Tarot_21_World.jpg'
+    ],
+    // Minor Arcana - Wands (Note: Wands09 uses different naming)
+    Wands: [
+        'Wands01.jpg', 'Wands02.jpg', 'Wands03.jpg', 'Wands04.jpg', 'Wands05.jpg',
+        'Wands06.jpg', 'Wands07.jpg', 'Wands08.jpg', 'Tarot_Nine_of_Wands.jpg', 'Wands10.jpg',
+        'Wands11.jpg', 'Wands12.jpg', 'Wands13.jpg', 'Wands14.jpg'
+    ],
+    Cups: [
+        'Cups01.jpg', 'Cups02.jpg', 'Cups03.jpg', 'Cups04.jpg', 'Cups05.jpg',
+        'Cups06.jpg', 'Cups07.jpg', 'Cups08.jpg', 'Cups09.jpg', 'Cups10.jpg',
+        'Cups11.jpg', 'Cups12.jpg', 'Cups13.jpg', 'Cups14.jpg'
+    ],
+    Swords: [
+        'Swords01.jpg', 'Swords02.jpg', 'Swords03.jpg', 'Swords04.jpg', 'Swords05.jpg',
+        'Swords06.jpg', 'Swords07.jpg', 'Swords08.jpg', 'Swords09.jpg', 'Swords10.jpg',
+        'Swords11.jpg', 'Swords12.jpg', 'Swords13.jpg', 'Swords14.jpg'
+    ],
+    Pentacles: [
+        'Pents01.jpg', 'Pents02.jpg', 'Pents03.jpg', 'Pents04.jpg', 'Pents05.jpg',
+        'Pents06.jpg', 'Pents07.jpg', 'Pents08.jpg', 'Pents09.jpg', 'Pents10.jpg',
+        'Pents11.jpg', 'Pents12.jpg', 'Pents13.jpg', 'Pents14.jpg'
+    ]
+};
+
+/**
  * Card interpretation keywords
  * @type {Object.<string, {up: string, rev: string}>}
  */
@@ -47,7 +99,7 @@ const KEYWORDS = {
     "The Sun": { up: "성공, 기쁨, 긍정, 활력, 명확함", rev: "일시적 우울, 성공 지연, 허영, 과신" },
     "Judgement": { up: "부활, 심판, 각성, 소명, 결정", rev: "자기 비판, 후회, 무시, 부정" },
     "The World": { up: "완성, 성취, 여행, 통합, 완전함", rev: "미완성, 지연, 부족함, 마무리 실패" },
-    
+
     // Suit keywords (for minor arcana generation)
     "Wands": { up: "열정, 행동, 창조, 영감, 의지", rev: "지연, 무기력, 갈등, 성급함" },
     "Cups": { up: "감정, 관계, 사랑, 직관, 치유", rev: "감정 과잉, 실망, 단절, 억압" },
@@ -57,52 +109,54 @@ const KEYWORDS = {
 
 /**
  * Spread definitions with position meanings
+ * Spreads are layout patterns only - fortune type determines interpretation context
  */
 export const SPREADS = {
-    daily: {
-        name: "오늘의 운세",
+    single: {
+        name: "원 카드",
+        description: "간단명료한 한 장",
         cardCount: 1,
-        positions: ["오늘의 메시지"]
+        positions: ["메시지"]
     },
-    three: {
-        name: "과거/현재/미래",
-        cardCount: 3,
-        positions: ["과거 (The Past)", "현재 (The Present)", "미래 (The Future)"]
-    },
-    choice: {
+    twoChoice: {
         name: "양자택일",
+        description: "두 가지 선택지 비교",
         cardCount: 2,
-        positions: ["선택 A의 흐름", "선택 B의 흐름"]
+        positions: ["선택 A", "선택 B"]
     },
-    love: {
-        name: "연애의 온도",
-        cardCount: 4,
-        positions: [
-            "나의 마음 (My Feelings)",
-            "상대방의 마음 (Their Feelings)",
-            "현재 관계의 상황 (Current Situation)",
-            "관계의 미래/조언 (Outcome/Advice)"
-        ]
-    },
-    mbs: {
-        name: "마음/몸/영혼",
+    threeCard: {
+        name: "쓰리 카드",
+        description: "과거-현재-미래의 흐름",
         cardCount: 3,
-        positions: ["마음 (Mind - 정신적 상태)", "몸 (Body - 현실/물질)", "영혼 (Spirit - 내면/교훈)"]
+        positions: ["과거", "현재", "미래"]
+    },
+    diamond: {
+        name: "다이아몬드",
+        description: "네 방향의 관점",
+        cardCount: 4,
+        positions: ["나", "상대/환경", "상황", "조언"]
+    },
+    cross: {
+        name: "크로스",
+        description: "다섯 가지 측면",
+        cardCount: 5,
+        positions: ["핵심", "위", "아래", "과거", "미래"]
     },
     celtic: {
-        name: "켈트 십자가",
+        name: "켈틱 크로스",
+        description: "심층 분석 10장",
         cardCount: 10,
         positions: [
-            "1. 현재 상황 (The Present)",
-            "2. 방해물/도전 (The Challenge)",
-            "3. 과거의 원인 (The Past)",
-            "4. 가까운 미래 (The Future)",
-            "5. 의식적 목표 (Conscious Goal)",
-            "6. 무의식적 영향 (Subconscious)",
-            "7. 당신의 태도 (Your Attitude)",
-            "8. 외부 환경 (Environment)",
-            "9. 희망과 두려움 (Hopes & Fears)",
-            "10. 최종 결과 (Final Outcome)"
+            "현재 상황",
+            "도전/방해",
+            "과거의 원인",
+            "가까운 미래",
+            "의식적 목표",
+            "무의식적 영향",
+            "당신의 태도",
+            "외부 환경",
+            "희망과 두려움",
+            "최종 결과"
         ]
     }
 };
@@ -113,7 +167,7 @@ export const SPREADS = {
  */
 export function createDeck() {
     const deck = [];
-    
+
     // Add Major Arcana (22 cards)
     MAJOR_ARCANA.forEach((name, index) => {
         deck.push({
@@ -122,10 +176,11 @@ export function createDeck() {
             type: 'major',
             suit: null,
             number: index,
-            keywords: KEYWORDS[name]
+            keywords: KEYWORDS[name],
+            image: `images/${IMAGE_PATHS.major[index]}`
         });
     });
-    
+
     // Add Minor Arcana (56 cards)
     SUITS.forEach(suit => {
         RANKS.forEach((rank, index) => {
@@ -139,11 +194,12 @@ export function createDeck() {
                 keywords: {
                     up: `${suitKeywords.up}과 연결된 ${rank}의 에너지`,
                     rev: `${suitKeywords.rev}과 관련된 ${rank}의 측면`
-                }
+                },
+                image: `images/${IMAGE_PATHS[suit][index]}`
             });
         });
     });
-    
+
     return deck;
 }
 
@@ -156,14 +212,14 @@ export function getCardIcon(card) {
     if (card.type === 'major') {
         return '<i class="fas fa-star text-purple-600"></i>';
     }
-    
+
     const icons = {
         Wands: '<i class="fas fa-fire text-red-700"></i>',
         Cups: '<i class="fas fa-wine-glass text-blue-700"></i>',
         Swords: '<i class="fas fa-wind text-yellow-700"></i>',
         Pentacles: '<i class="fas fa-coins text-green-700"></i>'
     };
-    
+
     return icons[card.suit] || '';
 }
 

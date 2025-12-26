@@ -1,0 +1,162 @@
+/* ===========================================
+   Spread Layout Styles
+   =========================================== */
+
+.spread-layout {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+/* Simple (1 card) */
+.spread-layout.layout-simple {
+    grid-template-columns: 1fr;
+    justify-items: center;
+}
+
+/* Horizontal layout */
+.spread-layout.layout-horizontal {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    max-width: 100%;
+}
+
+/* Vertical layout */
+.spread-layout.layout-vertical {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, auto);
+    justify-items: center;
+}
+
+/* Diamond layout (Love spread) */
+.spread-layout.layout-diamond {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, auto);
+    gap: var(--space-sm);
+}
+
+.spread-layout.layout-diamond .card-slot:nth-child(1) {
+    grid-area: 1 / 2;
+}
+
+.spread-layout.layout-diamond .card-slot:nth-child(2) {
+    grid-area: 2 / 1;
+}
+
+.spread-layout.layout-diamond .card-slot:nth-child(3) {
+    grid-area: 2 / 3;
+}
+
+.spread-layout.layout-diamond .card-slot:nth-child(4) {
+    grid-area: 3 / 2;
+}
+
+/* Cross layout */
+.spread-layout.layout-cross {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, auto);
+    gap: var(--space-sm);
+}
+
+.spread-layout.layout-cross .card-slot:nth-child(1) {
+    grid-area: 2 / 2;
+}
+
+.spread-layout.layout-cross .card-slot:nth-child(2) {
+    grid-area: 1 / 2;
+}
+
+.spread-layout.layout-cross .card-slot:nth-child(3) {
+    grid-area: 3 / 2;
+}
+
+.spread-layout.layout-cross .card-slot:nth-child(4) {
+    grid-area: 2 / 1;
+}
+
+.spread-layout.layout-cross .card-slot:nth-child(5) {
+    grid-area: 2 / 3;
+}
+
+/* Celtic Cross layout */
+.spread-layout.layout-celtic-cross {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, auto);
+    gap: var(--space-xs);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Celtic Cross positions */
+.spread-layout.layout-celtic-cross .card-slot:nth-child(1) {
+    grid-area: 2 / 2;
+    z-index: 1;
+}
+
+.spread-layout.layout-celtic-cross .card-slot:nth-child(2) {
+    grid-area: 2 / 2;
+    z-index: 2;
+    transform: rotate(90deg) translateX(10px);
+}
+
+.spread-layout.layout-celtic-cross .card-slot:nth-child(3) {
+    grid-area: 3 / 2;
+}
+
+.spread-layout.layout-celtic-cross .card-slot:nth-child(4) {
+    grid-area: 1 / 2;
+}
+
+.spread-layout.layout-celtic-cross .card-slot:nth-child(5) {
+    grid-area: 2 / 1;
+}
+
+.spread-layout.layout-celtic-cross .card-slot:nth-child(6) {
+    grid-area: 2 / 3;
+}
+
+.spread-layout.layout-celtic-cross .card-slot:nth-child(7) {
+    grid-area: 4 / 4;
+}
+
+.spread-layout.layout-celtic-cross .card-slot:nth-child(8) {
+    grid-area: 3 / 4;
+}
+
+.spread-layout.layout-celtic-cross .card-slot:nth-child(9) {
+    grid-area: 2 / 4;
+}
+
+.spread-layout.layout-celtic-cross .card-slot:nth-child(10) {
+    grid-area: 1 / 4;
+}
+
+/* Card slot wrapper */
+.card-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.card-slot-label {
+    font-size: 0.65rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .spread-layout.layout-celtic-cross {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2px;
+    }
+
+    .spread-layout.layout-celtic-cross .card-container {
+        width: 60px !important;
+        height: 100px !important;
+    }
+}
