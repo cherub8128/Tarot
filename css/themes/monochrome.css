@@ -1,0 +1,47 @@
+/* ===========================================
+   Monochrome Theme
+   High contrast black and white
+   =========================================== */
+
+.theme-monochrome {
+    /* Backgrounds */
+    --theme-bg-primary: #000000;
+    --theme-bg-secondary: #111111;
+    --theme-bg-panel: rgba(0, 0, 0, 0.9);
+    --theme-bg-card: rgba(20, 20, 20, 0.95);
+
+    /* Text */
+    --theme-text-primary: #ffffff;
+    --theme-text-secondary: #a3a3a3;
+    --theme-text-muted: #525252;
+    --theme-text-on-accent: #000000;
+    /* Black text on White buttons */
+
+    /* Accents */
+    --theme-accent-primary: #ffffff;
+    --theme-accent-secondary: #525252;
+    --theme-accent-gradient: linear-gradient(135deg, #ffffff, #a3a3a3);
+    --theme-accent-primary-rgb: 255, 255, 255;
+    --theme-accent-secondary-rgb: 82, 82, 82;
+
+    /* Borders */
+    --theme-border: rgba(255, 255, 255, 0.2);
+    --theme-border-hover: rgba(255, 255, 255, 0.4);
+
+    /* Shadows */
+    --theme-shadow: 0 10px 40px rgba(255, 255, 255, 0.1);
+    --theme-glow: 0 0 40px rgba(255, 255, 255, 0.1);
+
+    /* Fonts */
+    --theme-font-heading: 'DM Serif Display', serif;
+    --theme-font-body: 'DM Sans', sans-serif;
+
+    /* Particles */
+    --theme-particle-colors: #ffffff, #a3a3a3, #525252, #262626;
+}
+
+body.theme-monochrome {
+    background: #000000;
+    background-image:
+        radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000000 100%);
+}

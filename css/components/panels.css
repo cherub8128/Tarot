@@ -4,77 +4,88 @@
    =========================================== */
 
 .glass-panel {
-    background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.8) 100%);
+    background: var(--theme-bg-panel, linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.8) 100%));
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(139, 92, 246, 0.2);
+    border: 1px solid var(--theme-border, rgba(139, 92, 246, 0.2));
     box-shadow:
-        0 8px 32px 0 rgba(0, 0, 0, 0.3),
+        var(--theme-shadow, 0 8px 32px 0 rgba(0, 0, 0, 0.3)),
         inset 0 0 0 1px rgba(255, 255, 255, 0.05);
     border-radius: var(--radius-xl);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
 .glass-panel:hover {
     box-shadow:
-        0 12px 40px 0 rgba(0, 0, 0, 0.4),
-        inset 0 0 0 1px rgba(139, 92, 246, 0.2);
+        var(--theme-shadow, 0 12px 40px 0 rgba(0, 0, 0, 0.4)),
+        inset 0 0 0 1px var(--theme-border, rgba(139, 92, 246, 0.2));
 }
 
+/* ===========================================
+   Panel & Layout Components
+   Enhanced Glassmorphism
+   =========================================== */
+
+/* .glass-panel is already updated in reset.css, keeping consistent here if needed or removed to avoid duplicate */
+
 .gradient-text {
-    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+    background: var(--theme-accent-gradient, linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 0 30px rgba(251, 191, 36, 0.2);
+    text-shadow: 0 0 30px rgba(var(--theme-accent-primary-rgb, 251, 191, 36), 0.2);
 }
 
 /* Spread Selection Cards */
 .spread-card {
     padding: var(--space-md);
     border-radius: var(--radius-md);
-    background: rgba(30, 41, 59, 0.4);
-    border: 1px solid rgba(148, 163, 184, 0.1);
+    background: var(--theme-bg-panel);
+    border: 1px solid var(--theme-border);
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     backdrop-filter: blur(4px);
 }
 
 .spread-card:hover {
-    background: rgba(139, 92, 246, 0.2);
+    background: rgba(var(--theme-accent-primary-rgb), 0.1);
+    background: var(--theme-bg-secondary);
+    /* Fallback */
     transform: translateY(-5px) scale(1.02);
-    border-color: rgba(139, 92, 246, 0.5);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-color: var(--theme-accent-primary);
+    box-shadow: var(--theme-shadow);
 }
 
 /* Reading Result Styles */
 .reading-card {
-    background: rgba(15, 23, 42, 0.6);
-    border-left: 4px solid var(--color-gold);
+    background: var(--theme-bg-card);
+    border-left: 4px solid var(--theme-accent-secondary);
     padding: var(--space-lg);
     border-radius: var(--radius-lg);
     margin-bottom: var(--space-md);
     transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--theme-border);
 }
 
 .reading-card:hover {
     transform: translateX(5px);
-    background: rgba(30, 41, 59, 0.7);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    background: var(--theme-bg-panel);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .reading-card.reversed {
-    border-left-color: var(--color-text-secondary);
+    border-left-color: var(--theme-text-secondary);
 }
 
 /* Reading advice section */
 .reading-advice {
-    background: linear-gradient(135deg, rgba(88, 28, 135, 0.2), rgba(30, 58, 138, 0.2));
+    background: linear-gradient(135deg, rgba(var(--theme-accent-primary-rgb), 0.1), rgba(var(--theme-accent-secondary-rgb), 0.1));
+    /* Fallback for complex gradients */
+    background: var(--theme-bg-secondary);
     padding: var(--space-lg);
     border-radius: var(--radius-lg);
     margin-top: var(--space-xl);
-    border: 1px solid rgba(139, 92, 246, 0.3);
+    border: 1px solid var(--theme-border);
     position: relative;
     overflow: hidden;
 }
@@ -86,35 +97,36 @@
     left: 0;
     width: 4px;
     height: 100%;
-    background: linear-gradient(to bottom, #8b5cf6, #3b82f6);
+    background: var(--theme-accent-gradient);
 }
 
 .question-input {
     width: 100%;
     padding: var(--space-md);
-    background: var(--color-bg-secondary);
-    border: 1px solid var(--color-bg-tertiary);
+    background: var(--theme-bg-secondary);
+    border: 1px solid var(--theme-border);
     border-radius: var(--radius-md);
-    color: var(--color-text-primary);
+    color: var(--theme-text-primary);
     font-size: 1rem;
     resize: none;
     transition: border-color var(--transition-default);
 }
 
 .question-input::placeholder {
-    color: var(--color-text-muted);
+    color: var(--theme-text-muted);
 }
 
 .question-input:focus {
     outline: none;
-    border-color: var(--color-accent-purple);
+    border-color: var(--theme-accent-primary);
+    box-shadow: 0 0 0 2px rgba(var(--theme-accent-primary-rgb), 0.2);
 }
 
 /* Menu Tabs */
 .menu-tabs {
     display: flex;
     gap: var(--space-sm);
-    background: var(--color-bg-secondary);
+    background: var(--theme-bg-secondary);
     padding: var(--space-xs);
     border-radius: var(--radius-full);
 }
@@ -124,17 +136,43 @@
     border-radius: var(--radius-full);
     border: none;
     background: transparent;
-    color: var(--color-text-secondary);
+    color: var(--theme-text-secondary);
     cursor: pointer;
     transition: all var(--transition-default);
     font-weight: 500;
 }
 
 .menu-tab:hover {
-    color: var(--color-text-primary);
+    color: var(--theme-text-primary);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .menu-tab.active {
-    background: var(--color-accent-purple);
+    background: var(--theme-accent-primary);
     color: white;
+    /* Always white for readability on accent color */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Navigation Buttons (Fixed) */
+.nav-btn-fixed {
+    background: var(--theme-bg-panel);
+    color: var(--theme-text-secondary);
+    border: 1px solid var(--theme-border);
+    backdrop-filter: blur(8px);
+    transition: all var(--transition-default);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.nav-btn-fixed:hover {
+    background: var(--theme-accent-primary);
+    color: white;
+    /* Always white on accent */
+    border-color: var(--theme-accent-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--theme-shadow);
+}
+
+.theme-pure_white .nav-btn-fixed {
+    background: rgba(255, 255, 255, 0.9);
 }

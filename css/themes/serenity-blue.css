@@ -1,0 +1,40 @@
+/* ===========================================
+   Serenity Blue Theme
+   Calm sky blue (Pantone 15-3919)
+   =========================================== */
+
+.theme-serenity_blue {
+    --theme-bg-primary: #0a1628;
+    --theme-bg-secondary: #1e3a5f;
+    --theme-bg-panel: rgba(30, 58, 95, 0.95);
+    --theme-bg-card: rgba(10, 22, 40, 0.9);
+
+    --theme-text-primary: #f0f9ff;
+    --theme-text-secondary: #7dd3fc;
+    --theme-text-muted: #0284c7;
+    --theme-text-on-accent: #0c4a6e;
+    /* Dark blue */
+
+    --theme-accent-primary: #7dd3fc;
+    --theme-accent-secondary: #fbbf24;
+    --theme-accent-gradient: linear-gradient(135deg, #7dd3fc, #fbbf24);
+    --theme-accent-primary-rgb: 125, 211, 252;
+    --theme-accent-secondary-rgb: 251, 191, 36;
+
+    --theme-border: rgba(125, 211, 252, 0.3);
+    --theme-border-hover: rgba(125, 211, 252, 0.5);
+
+    --theme-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --theme-glow: 0 0 40px rgba(125, 211, 252, 0.2);
+
+    --theme-font-heading: 'Lora', serif;
+    --theme-font-body: 'Open Sans', sans-serif;
+
+    --theme-particle-colors: #7dd3fc, #38bdf8, #0ea5e9, #fbbf24;
+}
+
+body.theme-serenity_blue {
+    background:
+        radial-gradient(ellipse at top, rgba(2, 132, 199, 0.3) 0%, transparent 50%),
+        linear-gradient(180deg, #0a1628 0%, #1e3a5f 50%, #0a1628 100%);
+}

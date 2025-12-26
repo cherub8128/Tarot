@@ -1,0 +1,55 @@
+/* ===========================================
+   Greenery Theme
+   Mystical Forest & Sage - Elegant and calming
+   =========================================== */
+
+.theme-greenery {
+    /* Backgrounds: Deep Forest */
+    --theme-bg-primary: #132a13;
+    /* Very dark moss */
+    --theme-bg-secondary: #1a3c1a;
+    /* Dark green */
+    --theme-bg-panel: rgba(26, 60, 26, 0.85);
+    --theme-bg-card: rgba(19, 42, 19, 0.9);
+
+    /* Text: Natural tones */
+    --theme-text-primary: #ecf39e;
+    /* Pale yellowish green/cream */
+    --theme-text-secondary: #90be6d;
+    /* Sage green */
+    --theme-text-muted: #4f772d;
+    --theme-text-on-accent: #132a13;
+    /* Dark text on bright buttons */
+
+    /* Accents: Vibrant nature */
+    --theme-accent-primary: #90be6d;
+    /* Sage */
+    --theme-accent-secondary: #ecf39e;
+    /* Cream */
+    --theme-accent-gradient: linear-gradient(135deg, #90be6d, #4d908e);
+    /* Sage to Teal */
+    --theme-accent-primary-rgb: 144, 190, 109;
+    --theme-accent-secondary-rgb: 236, 243, 158;
+
+    /* Borders */
+    --theme-border: rgba(144, 190, 109, 0.3);
+    --theme-border-hover: rgba(144, 190, 109, 0.5);
+
+    /* Shadows */
+    --theme-shadow: 0 10px 40px rgba(0, 20, 0, 0.6);
+    --theme-glow: 0 0 40px rgba(144, 190, 109, 0.2);
+
+    /* Fonts */
+    --theme-font-heading: 'Lora', serif;
+    --theme-font-body: 'Nunito', sans-serif;
+
+    /* Particles */
+    --theme-particle-colors: #90be6d, #4d908e, #f9c74f, #ecf39e;
+}
+
+body.theme-greenery {
+    background:
+        radial-gradient(circle at 20% 30%, rgba(77, 144, 142, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(144, 190, 109, 0.15) 0%, transparent 50%),
+        linear-gradient(180deg, #132a13 0%, #1a3c1a 100%);
+}

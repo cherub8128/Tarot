@@ -1,0 +1,48 @@
+/* ===========================================
+   Viva Magenta Theme
+   Bold reddish pink (Pantone 18-1750)
+   =========================================== */
+
+.theme-viva_magenta {
+    /* Backgrounds */
+    --theme-bg-primary: #1a050a;
+    /* Dark maroon */
+    --theme-bg-secondary: #3b0714;
+    --theme-bg-panel: rgba(60, 10, 24, 0.9);
+    /* Magenta-tinted panel */
+    --theme-bg-card: rgba(40, 5, 15, 0.95);
+
+    /* Text */
+    --theme-text-primary: #fff0f5;
+    --theme-text-secondary: #fbcfe8;
+    --theme-text-muted: #be123c;
+    --theme-text-on-accent: #ffffff;
+
+    /* Accents */
+    --theme-accent-primary: #be123c;
+    /* Rose 700 */
+    --theme-accent-secondary: #fbbf24;
+    --theme-accent-gradient: linear-gradient(135deg, #be123c, #9f1239);
+    --theme-accent-primary-rgb: 190, 18, 60;
+    --theme-accent-secondary-rgb: 251, 191, 36;
+
+    /* Borders */
+    --theme-border: rgba(190, 18, 60, 0.3);
+    --theme-border-hover: rgba(190, 18, 60, 0.5);
+
+    /* Shadows */
+    --theme-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    --theme-glow: 0 0 40px rgba(190, 18, 60, 0.3);
+
+    /* Fonts */
+    --theme-font-heading: 'Playfair Display', serif;
+    --theme-font-body: 'Raleway', sans-serif;
+
+    --theme-particle-colors: #be123c, #e11d48, #fbbf24, #f43f5e;
+}
+
+body.theme-viva_magenta {
+    background:
+        radial-gradient(ellipse at top, rgba(190, 18, 60, 0.2) 0%, transparent 60%),
+        linear-gradient(180deg, #1a050a 0%, #3b0714 100%);
+}

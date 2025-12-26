@@ -1,0 +1,40 @@
+/* ===========================================
+   Ultra Violet Theme
+   Creative purple (Pantone 18-3838)
+   =========================================== */
+
+.theme-ultra_violet {
+    --theme-bg-primary: #14081f;
+    --theme-bg-secondary: #2d1b4e;
+    --theme-bg-panel: rgba(45, 27, 78, 0.9);
+    --theme-bg-card: rgba(20, 8, 31, 0.8);
+
+    --theme-text-primary: #faf5ff;
+    --theme-text-secondary: #c084fc;
+    --theme-text-muted: #7c3aed;
+    --theme-text-on-accent: #ffffff;
+
+    --theme-accent-primary: #a855f7;
+    /* Purple 500 */
+    --theme-accent-secondary: #fbbf24;
+    --theme-accent-gradient: linear-gradient(135deg, #a855f7, #fbbf24);
+    --theme-accent-primary-rgb: 168, 85, 247;
+    --theme-accent-secondary-rgb: 251, 191, 36;
+
+    --theme-border: rgba(168, 85, 247, 0.3);
+    --theme-border-hover: rgba(168, 85, 247, 0.5);
+
+    --theme-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    --theme-glow: 0 0 40px rgba(168, 85, 247, 0.3);
+
+    --theme-font-heading: 'Abril Fatface', serif;
+    --theme-font-body: 'Roboto', sans-serif;
+
+    --theme-particle-colors: #a855f7, #c084fc, #e879f9, #fbbf24;
+}
+
+body.theme-ultra_violet {
+    background:
+        radial-gradient(ellipse at top, rgba(124, 58, 237, 0.3) 0%, transparent 50%),
+        linear-gradient(180deg, #14081f 0%, #2d1b4e 50%, #14081f 100%);
+}

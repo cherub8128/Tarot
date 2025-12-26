@@ -36,16 +36,16 @@ export function createReadingDisplay(selectedCards, spreadType, fortuneType = 'g
 
     container.innerHTML = `
         <div class="glass-panel p-6 md:p-10">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 border-b border-slate-600 pb-4">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 border-b border-theme pb-4">
                 <div>
-                    <h2 class="text-3xl serif text-amber-100">리딩 결과</h2>
-                    <span class="text-sm text-purple-300" id="fortune-type-label"></span>
+                    <h2 class="text-3xl serif text-primary">리딩 결과</h2>
+                    <span class="text-sm text-accent" id="fortune-type-label"></span>
                 </div>
             </div>
             
             <div id="reading-cards" class="space-y-8">
                 <!-- Card interpretations will be inserted here -->
-                <div class="text-center text-slate-400">
+                <div class="text-center text-secondary">
                     <i class="fas fa-spinner fa-spin mr-2"></i>해석을 불러오는 중...
                 </div>
             </div>
@@ -55,15 +55,15 @@ export function createReadingDisplay(selectedCards, spreadType, fortuneType = 'g
             </div>
             
             <!-- Question Input Section -->
-            <div class="mt-10 p-6 bg-slate-700/50 rounded-xl border border-slate-600">
-                <h3 class="text-lg font-bold text-purple-300 mb-3">
+            <div class="mt-10 p-6 bg-theme-sec rounded-xl border border-theme">
+                <h3 class="text-lg font-bold text-accent mb-3">
                     <i class="fas fa-robot mr-2"></i>AI에게 더 자세히 물어보기
                 </h3>
-                <p class="text-slate-400 text-sm mb-4">질문을 입력하면 타로 결과와 함께 복사됩니다.</p>
+                <p class="text-secondary text-sm mb-4">질문을 입력하면 타로 결과와 함께 복사됩니다.</p>
                 <div class="flex flex-col gap-3">
                     <textarea 
                         id="user-question" 
-                        class="w-full p-4 bg-slate-800 border border-slate-600 rounded-xl text-slate-200 placeholder-slate-500 focus:border-purple-500 focus:outline-none resize-none"
+                        class="w-full p-4 bg-theme-main border border-theme rounded-xl text-primary placeholder-slate-500 focus:border-accent focus:outline-none resize-none"
                         rows="3" 
                         placeholder="예: 이 상황에서 제가 어떻게 행동해야 할까요? / 연애 운이 좋아지려면 어떻게 해야 하나요?"></textarea>
                     <button id="copy-for-ai" class="btn-copy self-end">
@@ -186,12 +186,12 @@ function createCardInterpretation(card, positionName, meaning) {
     div.className = `reading-card ${card.isReversed ? 'reversed' : ''}`;
 
     div.innerHTML = `
-        <h4 class="text-sm uppercase tracking-wider text-slate-400 mb-1">${positionName}</h4>
-        <h3 class="text-xl serif font-bold text-amber-200 mb-2">
+        <h4 class="text-sm uppercase tracking-wider text-secondary mb-1">${positionName}</h4>
+        <h3 class="text-xl serif font-bold text-accent mb-2">
             ${card.name} 
             <span class="text-sm font-sans font-normal opacity-70">(${card.isReversed ? '역방향' : '정방향'})</span>
         </h3>
-        <p class="text-slate-300 leading-relaxed">${meaning}</p>
+        <p class="text-primary leading-relaxed">${meaning}</p>
     `;
 
     return div;
@@ -222,13 +222,13 @@ function createAdvice(spreadType, fortuneType) {
     const wisdom = wisdomMap[fortuneType] || wisdomMap.general;
 
     div.innerHTML = `
-        <h3 class="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-amber-200 mb-3">
-            <i class="fas fa-moon mr-2 text-purple-400"></i>운명의 조언
+        <h3 class="text-lg font-bold gradient-text mb-3">
+            <i class="fas fa-moon mr-2 text-accent"></i>운명의 조언
         </h3>
-        <p class="text-slate-200 font-serif text-lg leading-relaxed italic border-l-2 border-purple-500/30 pl-4">
+        <p class="text-primary font-serif text-lg leading-relaxed italic border-l-2 border-accent pl-4">
             "${wisdom}"
         </p>
-        <p class="text-sm text-slate-400 mt-3 text-right">
+        <p class="text-sm text-secondary mt-3 text-right">
             - Digital Entropy Tarot
         </p>
     `;

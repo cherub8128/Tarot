@@ -1,0 +1,40 @@
+/* ===========================================
+   Rose Quartz Theme
+   Soft romantic pink (Pantone 13-1520)
+   =========================================== */
+
+.theme-rose_quartz {
+    --theme-bg-primary: #1a0a10;
+    --theme-bg-secondary: #2d1520;
+    --theme-bg-panel: rgba(45, 21, 32, 0.95);
+    --theme-bg-card: rgba(26, 10, 16, 0.9);
+
+    --theme-text-primary: #fdf2f8;
+    --theme-text-secondary: #f9a8d4;
+    --theme-text-muted: #be185d;
+    --theme-text-on-accent: #831843;
+    /* Dark pink */
+
+    --theme-accent-primary: #f9a8d4;
+    --theme-accent-secondary: #fbbf24;
+    --theme-accent-gradient: linear-gradient(135deg, #f9a8d4, #fbbf24);
+    --theme-accent-primary-rgb: 249, 168, 212;
+    --theme-accent-secondary-rgb: 251, 191, 36;
+
+    --theme-border: rgba(249, 168, 212, 0.3);
+    --theme-border-hover: rgba(249, 168, 212, 0.5);
+
+    --theme-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --theme-glow: 0 0 40px rgba(249, 168, 212, 0.2);
+
+    --theme-font-heading: 'Libre Baskerville', serif;
+    --theme-font-body: 'Poppins', sans-serif;
+
+    --theme-particle-colors: #f9a8d4, #fbbf24, #f472b6, #fb7185;
+}
+
+body.theme-rose_quartz {
+    background:
+        radial-gradient(ellipse at top, rgba(190, 24, 93, 0.2) 0%, transparent 50%),
+        linear-gradient(180deg, #1a0a10 0%, #2d1520 50%, #1a0a10 100%);
+}

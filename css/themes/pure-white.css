@@ -1,0 +1,70 @@
+/* ===========================================
+   Pure White Theme
+   Warm Ivory & Gold - Elegant and Bright
+   =========================================== */
+
+.theme-pure_white {
+    /* Backgrounds: Warm & Bright */
+    --theme-bg-primary: #ffffff;
+    --theme-bg-secondary: #fdfbf7;
+    /* Warm Ivory */
+    --theme-bg-panel: rgba(255, 255, 255, 0.9);
+    --theme-bg-card: rgba(255, 253, 250, 0.95);
+
+    /* Text: Warm Gray & Dark Gold */
+    --theme-text-primary: #292524;
+    /* Stone 800 */
+    --theme-text-secondary: #57534e;
+    /* Stone 600 */
+    --theme-text-muted: #a8a29e;
+    /* Stone 400 */
+    --theme-text-on-accent: #ffffff;
+
+    /* Accents: Amber Gold */
+    --theme-accent-primary: #d97706;
+    /* Amber 600 */
+    --theme-accent-secondary: #fbbf24;
+    /* Amber 400 */
+    --theme-accent-gradient: linear-gradient(135deg, #d97706, #fbbf24);
+    --theme-accent-primary-rgb: 217, 119, 6;
+    --theme-accent-secondary-rgb: 251, 191, 36;
+
+    /* Borders: Subtle Gold */
+    --theme-border: rgba(217, 119, 6, 0.15);
+    --theme-border-hover: rgba(217, 119, 6, 0.3);
+
+    /* Shadows: Warm Glow */
+    --theme-shadow: 0 10px 40px rgba(217, 119, 6, 0.08);
+    --theme-glow: 0 0 30px rgba(251, 191, 36, 0.15);
+
+    /* Fonts */
+    --theme-font-heading: 'Cinzel', serif;
+    --theme-font-body: 'Noto Sans KR', sans-serif;
+
+    /* Particles */
+    --theme-particle-colors: #fbbf24, #d97706, #fcd34d, #b45309;
+}
+
+.theme-pure_white body,
+body.theme-pure_white {
+    background: linear-gradient(180deg, #ffffff 0%, #fdfbf7 100%);
+    background-color: #ffffff;
+}
+
+/* Light mode overrides for specific elements */
+.theme-pure_white .glass-panel {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(217, 119, 60, 0.15);
+}
+
+.theme-pure_white .question-input {
+    background: #ffffff;
+    border-color: #e7e5e4;
+    /* Stone 200 */
+    color: #292524;
+}
+
+.theme-pure_white .question-input:focus {
+    border-color: #d97706;
+    background: #ffffff;
+}

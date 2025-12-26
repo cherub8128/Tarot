@@ -16,19 +16,17 @@ html {
 }
 
 body {
-    font-family: 'Noto Sans KR', -apple-system, sans-serif;
-    background:
-        radial-gradient(ellipse at top, rgba(88, 28, 135, 0.3) 0%, transparent 50%),
-        radial-gradient(ellipse at bottom, rgba(30, 58, 138, 0.3) 0%, transparent 50%),
-        linear-gradient(180deg, #0f0a1a 0%, #1a0f2e 50%, #0a1628 100%);
+    font-family: var(--theme-font-body, 'Noto Sans KR'), -apple-system, sans-serif;
+    background: var(--theme-bg-primary, #0f0a1a);
     background-attachment: fixed;
-    color: var(--color-text);
+    color: var(--theme-text-primary, #f1f5f9);
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-/* Mystical star field background */
+/* Mystical star field background (for dark themes) */
 body::before {
     content: '';
     position: fixed;
@@ -37,59 +35,59 @@ body::before {
     right: 0;
     bottom: 0;
     background-image:
-        radial-gradient(1px 1px at 20px 30px, white, transparent),
-        radial-gradient(1px 1px at 40px 70px, rgba(255, 255, 255, 0.8), transparent),
-        radial-gradient(1.5px 1.5px at 50px 160px, rgba(255, 215, 0, 0.6), transparent),
-        radial-gradient(1px 1px at 90px 40px, white, transparent),
-        radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.7), transparent),
-        radial-gradient(1.5px 1.5px at 160px 120px, rgba(147, 112, 219, 0.8), transparent),
-        radial-gradient(1px 1px at 200px 200px, white, transparent),
-        radial-gradient(1px 1px at 250px 50px, rgba(255, 255, 255, 0.6), transparent),
-        radial-gradient(1.5px 1.5px at 300px 150px, rgba(255, 215, 0, 0.5), transparent);
+        radial-gradient(1px 1px at 20px 30px, var(--theme-accent-primary, white), transparent),
+        radial-gradient(1px 1px at 40px 70px, var(--theme-accent-secondary, rgba(255, 255, 255, 0.8)), transparent),
+        radial-gradient(1.5px 1.5px at 50px 160px, var(--theme-accent-primary, rgba(255, 215, 0, 0.6)), transparent),
+        radial-gradient(1px 1px at 90px 40px, var(--theme-accent-secondary, white), transparent),
+        radial-gradient(1px 1px at 130px 80px, var(--theme-accent-primary, rgba(255, 255, 255, 0.7)), transparent),
+        radial-gradient(1.5px 1.5px at 160px 120px, var(--theme-accent-secondary, rgba(147, 112, 219, 0.8)), transparent);
     background-size: 350px 350px;
     animation: twinkle 8s ease-in-out infinite alternate;
     pointer-events: none;
     z-index: 0;
+    opacity: 0.6;
+}
+
+/* Hide stars on light themes */
+body.theme-pure_white::before {
+    display: none;
 }
 
 @keyframes twinkle {
 
     0%,
     100% {
-        opacity: 0.5;
+        opacity: 0.4;
     }
 
     50% {
-        opacity: 1;
+        opacity: 0.8;
     }
 }
 
 /* Serif font class */
 .serif {
-    font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+    font-family: var(--theme-font-heading, 'Cormorant Garamond'), 'Times New Roman', serif;
 }
 
-/* Gradient text */
+/* Gradient text using theme colors */
 .gradient-text {
-    background: linear-gradient(135deg, #f5d77a 0%, #fbbf24 30%, #f5a623 60%, #d97706 100%);
+    background: var(--theme-accent-gradient, linear-gradient(135deg, #fbbf24, #d97706));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 0 40px rgba(245, 215, 122, 0.3);
 }
 
-/* Glass panel with floating effect */
+/* Glass panel with floating effect - uses theme variables */
 .glass-panel {
-    background: linear-gradient(135deg, rgba(30, 27, 75, 0.85) 0%, rgba(20, 18, 50, 0.9) 100%);
+    background: var(--theme-bg-panel, linear-gradient(135deg, rgba(30, 27, 75, 0.85) 0%, rgba(20, 18, 50, 0.9) 100%));
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(139, 92, 246, 0.3);
+    border: 1px solid var(--theme-border, rgba(139, 92, 246, 0.3));
     border-radius: 24px;
-    box-shadow:
-        0 10px 40px rgba(0, 0, 0, 0.5),
-        0 0 80px rgba(139, 92, 246, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    box-shadow: var(--theme-shadow, 0 10px 40px rgba(0, 0, 0, 0.5));
     animation: floatPanel 6s ease-in-out infinite;
     position: relative;
+    transition: background 0.3s, border-color 0.3s;
 }
 
 .glass-panel::before {
@@ -99,7 +97,7 @@ body::before {
     left: 20%;
     right: 20%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.5), transparent);
+    background: linear-gradient(90deg, transparent, var(--theme-accent-secondary, rgba(255, 215, 0, 0.5)), transparent);
 }
 
 @keyframes floatPanel {
@@ -119,4 +117,78 @@ body::before {
     .glass-panel {
         animation: none;
     }
+}
+
+/* Semantic Color Utilities to replace Tailwind colors */
+.text-primary {
+    color: var(--theme-text-primary) !important;
+}
+
+.text-secondary {
+    color: var(--theme-text-secondary) !important;
+}
+
+.text-muted {
+    color: var(--theme-text-muted) !important;
+}
+
+.text-accent {
+    color: var(--theme-accent-primary) !important;
+}
+
+.text-accent-sec {
+    color: var(--theme-accent-secondary) !important;
+}
+
+.bg-panel {
+    background: var(--theme-bg-panel) !important;
+}
+
+.bg-theme-main {
+    background: var(--theme-bg-primary) !important;
+}
+
+.bg-theme-sec {
+    background: var(--theme-bg-secondary) !important;
+}
+
+.border-theme {
+    border-color: var(--theme-border) !important;
+}
+
+.border-accent {
+    border-color: var(--theme-accent-primary) !important;
+}
+
+/* Force override common slate colors if they remain */
+.text-slate-300,
+.text-slate-400,
+.text-slate-500,
+.text-slate-600,
+.text-gray-300,
+.text-gray-400,
+.text-gray-500,
+.text-gray-600 {
+    color: var(--theme-text-secondary) !important;
+}
+
+.text-white,
+.text-slate-100,
+.text-slate-200,
+.text-slate-50 {
+    color: var(--theme-text-primary) !important;
+}
+
+.text-amber-100,
+.text-amber-200,
+.text-amber-300 {
+    color: var(--theme-text-primary) !important;
+}
+
+.text-amber-400,
+.text-amber-500,
+.text-purple-400,
+.text-purple-500,
+.text-purple-300 {
+    color: var(--theme-accent-primary) !important;
 }

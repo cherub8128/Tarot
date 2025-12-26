@@ -1,0 +1,40 @@
+/* ===========================================
+   Living Coral Theme
+   Vibrant coral orange (Pantone 16-1546)
+   =========================================== */
+
+.theme-living_coral {
+    --theme-bg-primary: #1a0f0a;
+    --theme-bg-secondary: #2d1a12;
+    --theme-bg-panel: rgba(45, 26, 18, 0.95);
+    --theme-bg-card: rgba(26, 15, 10, 0.9);
+
+    --theme-text-primary: #fff7ed;
+    --theme-text-secondary: #fb923c;
+    --theme-text-muted: #c2410c;
+    --theme-text-on-accent: #431407;
+    /* Dark reddish brown */
+
+    --theme-accent-primary: #fb923c;
+    --theme-accent-secondary: #fbbf24;
+    --theme-accent-gradient: linear-gradient(135deg, #fb923c, #fbbf24);
+    --theme-accent-primary-rgb: 251, 146, 60;
+    --theme-accent-secondary-rgb: 251, 191, 36;
+
+    --theme-border: rgba(251, 146, 60, 0.3);
+    --theme-border-hover: rgba(251, 146, 60, 0.5);
+
+    --theme-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --theme-glow: 0 0 40px rgba(251, 146, 60, 0.2);
+
+    --theme-font-heading: 'Josefin Sans', sans-serif;
+    --theme-font-body: 'Nunito', sans-serif;
+
+    --theme-particle-colors: #fb923c, #f97316, #fbbf24, #ef4444;
+}
+
+body.theme-living_coral {
+    background:
+        radial-gradient(ellipse at top, rgba(194, 65, 12, 0.3) 0%, transparent 50%),
+        linear-gradient(180deg, #1a0f0a 0%, #2d1a12 50%, #1a0f0a 100%);
+}

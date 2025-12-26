@@ -1,0 +1,51 @@
+/* ===========================================
+   Classic Blue Theme
+   Royal Night - Deep, elegant, and timeless
+   =========================================== */
+
+.theme-classic_blue {
+    /* Backgrounds: Royal Navy */
+    --theme-bg-primary: #001233;
+    /* Deepest Navy */
+    --theme-bg-secondary: #001845;
+    /* Rich Navy */
+    --theme-bg-panel: rgba(0, 24, 69, 0.85);
+    --theme-bg-card: rgba(0, 18, 51, 0.95);
+
+    /* Text: Crisp White & Cool Silver */
+    --theme-text-primary: #ffffff;
+    --theme-text-secondary: #979dac;
+    --theme-text-muted: #5c677d;
+    --theme-text-on-accent: #ffffff;
+
+    /* Accents: Electric Blue & Silver */
+    --theme-accent-primary: #0466c8;
+    /* Royal Blue */
+    --theme-accent-secondary: #023e8a;
+    /* Darker Blue */
+    --theme-accent-gradient: linear-gradient(135deg, #0466c8, #002855);
+    /* Royal to Deep */
+    --theme-accent-primary-rgb: 4, 102, 200;
+    --theme-accent-secondary-rgb: 2, 62, 138;
+
+    /* Borders */
+    --theme-border: rgba(4, 102, 200, 0.4);
+    --theme-border-hover: rgba(4, 102, 200, 0.6);
+
+    /* Shadows */
+    --theme-shadow: 0 12px 48px rgba(0, 0, 20, 0.6);
+    --theme-glow: 0 0 50px rgba(4, 102, 200, 0.3);
+
+    /* Fonts */
+    --theme-font-heading: 'Playfair Display', serif;
+    --theme-font-body: 'Source Sans Pro', sans-serif;
+
+    /* Particles */
+    --theme-particle-colors: #0466c8, #00b4d8, #caf0f8, #03045e;
+}
+
+body.theme-classic_blue {
+    background:
+        radial-gradient(ellipse at top, rgba(4, 102, 200, 0.2) 0%, transparent 60%),
+        linear-gradient(180deg, #001233 0%, #001845 100%);
+}

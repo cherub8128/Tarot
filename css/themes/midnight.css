@@ -1,0 +1,46 @@
+/* ===========================================
+   Midnight Theme (Default)
+   Mystical dark blue and gold
+   =========================================== */
+
+.theme-midnight {
+    /* Backgrounds */
+    --theme-bg-primary: #0f172a;
+    --theme-bg-secondary: #1e293b;
+    --theme-bg-panel: rgba(30, 27, 75, 0.85);
+    --theme-bg-card: rgba(15, 23, 42, 0.95);
+
+    /* Text */
+    --theme-text-primary: #f8fafc;
+    --theme-text-secondary: #94a3b8;
+    --theme-text-muted: #64748b;
+    --theme-text-on-accent: #ffffff;
+
+    /* Accents */
+    --theme-accent-primary: #fbbf24;
+    --theme-accent-secondary: #8b5cf6;
+    --theme-accent-gradient: linear-gradient(135deg, #fbbf24, #d97706);
+    --theme-accent-primary-rgb: 251, 191, 36;
+    --theme-accent-secondary-rgb: 139, 92, 246;
+
+    /* Borders */
+    --theme-border: rgba(139, 92, 246, 0.3);
+    --theme-border-hover: rgba(139, 92, 246, 0.5);
+
+    /* Shadows */
+    --theme-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    --theme-glow: 0 0 40px rgba(139, 92, 246, 0.2);
+
+    /* Fonts */
+    --theme-font-heading: 'Cinzel', serif;
+    --theme-font-body: 'Noto Sans KR', sans-serif;
+
+    /* Particles */
+    --theme-particle-colors: #fbbf24, #f59e0b, #8b5cf6, #c084fc;
+}
+
+body.theme-midnight {
+    background:
+        radial-gradient(ellipse at top, rgba(30, 27, 75, 0.5) 0%, transparent 50%),
+        linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+}

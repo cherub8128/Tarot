@@ -1,0 +1,40 @@
+/* ===========================================
+   Peach Fuzz Theme
+   Warm peach (Pantone 13-1023)
+   =========================================== */
+
+.theme-peach_fuzz {
+    --theme-bg-primary: #1a140a;
+    --theme-bg-secondary: #2d2012;
+    --theme-bg-panel: rgba(45, 32, 18, 0.95);
+    --theme-bg-card: rgba(26, 20, 10, 0.9);
+
+    --theme-text-primary: #fffbeb;
+    --theme-text-secondary: #fcd34d;
+    --theme-text-muted: #d97706;
+    --theme-text-on-accent: #451a03;
+    /* Dark brown for contrast on yellow/orange buttons */
+
+    --theme-accent-primary: #fbbf24;
+    --theme-accent-secondary: #f97316;
+    --theme-accent-gradient: linear-gradient(135deg, #fbbf24, #f97316);
+    --theme-accent-primary-rgb: 251, 191, 36;
+    --theme-accent-secondary-rgb: 249, 115, 22;
+
+    --theme-border: rgba(251, 191, 36, 0.3);
+    --theme-border-hover: rgba(251, 191, 36, 0.5);
+
+    --theme-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --theme-glow: 0 0 40px rgba(251, 191, 36, 0.2);
+
+    --theme-font-heading: 'DM Serif Display', serif;
+    --theme-font-body: 'DM Sans', sans-serif;
+
+    --theme-particle-colors: #fbbf24, #fcd34d, #f97316, #fb923c;
+}
+
+body.theme-peach_fuzz {
+    background:
+        radial-gradient(ellipse at top, rgba(217, 119, 6, 0.3) 0%, transparent 50%),
+        linear-gradient(180deg, #1a140a 0%, #2d2012 50%, #1a140a 100%);
+}
