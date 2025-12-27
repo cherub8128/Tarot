@@ -158,6 +158,25 @@ export const SPREADS = {
             "희망과 두려움",
             "최종 결과"
         ]
+    },
+    // 자유질문 모드용 스프레드
+    open1: {
+        name: "자유질문 1장",
+        description: "간단한 답변",
+        cardCount: 1,
+        positions: ["답변"]
+    },
+    open3: {
+        name: "자유질문 3장",
+        description: "상황-조언-결과",
+        cardCount: 3,
+        positions: ["상황", "조언", "결과"]
+    },
+    open5: {
+        name: "자유질문 5장",
+        description: "심층 분석",
+        cardCount: 5,
+        positions: ["핵심", "위", "아래", "과거", "미래"]
     }
 };
 
