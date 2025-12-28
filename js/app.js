@@ -134,7 +134,10 @@ class TarotApp {
 
     _onEntropyComplete(seed) {
         let cardCount;
-        if (this.settings.selectedSpread) {
+        // 자유질문 모드는 사용자가 선택한 카드 수 사용, 일반 스프레드는 스프레드 설정 사용
+        if (this.settings.selectedSpread === 'openQuestion') {
+            cardCount = this.settings.cardCount;
+        } else if (this.settings.selectedSpread) {
             cardCount = SPREADS[this.settings.selectedSpread].cardCount;
         } else {
             cardCount = this.settings.cardCount;
