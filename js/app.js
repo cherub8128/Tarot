@@ -544,7 +544,7 @@ class TarotApp {
         const userQuestion = appState.getValue('userQuestion') || this.settings.openQuestion;
         const fortuneType = this.settings.selectedFortune;
 
-        const readingDisplay = createReadingDisplay(cards, spreadType, fortuneType);
+        const readingDisplay = createReadingDisplay(cards, spreadType, fortuneType, userQuestion);
 
         // Add question display if present
         if (userQuestion) {

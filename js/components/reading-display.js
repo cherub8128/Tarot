@@ -24,9 +24,10 @@ export function setFortuneType(fortuneType) {
  * @param {Object[]} selectedCards - Array of selected card objects with isReversed flag
  * @param {string} spreadType - Type of spread used
  * @param {string} fortuneType - Fortune type for interpretations
+ * @param {string} userQuestion - Pre-filled question from free question mode
  * @returns {HTMLElement} Reading display container
  */
-export function createReadingDisplay(selectedCards, spreadType, fortuneType = 'general') {
+export function createReadingDisplay(selectedCards, spreadType, fortuneType = 'general', userQuestion = '') {
     currentFortuneType = fortuneType;
 
     const container = document.createElement('div');
@@ -88,9 +89,14 @@ export function createReadingDisplay(selectedCards, spreadType, fortuneType = 'g
     const copyBtn = container.querySelector('#copy-for-ai');
     const questionInput = container.querySelector('#user-question');
 
+    // 자유질문에서 입력한 질문을 미리 채우기
+    if (userQuestion) {
+        questionInput.value = userQuestion;
+    }
+
     copyBtn.addEventListener('click', () => {
-        const userQuestion = questionInput.value.trim();
-        copyForAI(selectedCards, spreadType, userQuestion, fortuneType);
+        const userQuestionValue = questionInput.value.trim();
+        copyForAI(selectedCards, spreadType, userQuestionValue, fortuneType);
         copyBtn.classList.add('copied');
         copyBtn.innerHTML = '<i class="fas fa-check"></i><span>복사됨!</span>';
         setTimeout(() => {
