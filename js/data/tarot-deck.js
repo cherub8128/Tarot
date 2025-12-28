@@ -159,24 +159,13 @@ export const SPREADS = {
             "최종 결과"
         ]
     },
-    // 자유질문 모드용 스프레드
-    open1: {
-        name: "자유질문 1장",
-        description: "간단한 답변",
-        cardCount: 1,
-        positions: ["답변"]
-    },
-    open3: {
-        name: "자유질문 3장",
-        description: "상황-조언-결과",
-        cardCount: 3,
-        positions: ["상황", "조언", "결과"]
-    },
-    open5: {
-        name: "자유질문 5장",
-        description: "심층 분석",
-        cardCount: 5,
-        positions: ["핵심", "위", "아래", "과거", "미래"]
+    // 자유질문 모드용 스프레드 (메뉴에 표시되지 않음)
+    openQuestion: {
+        name: "자유 질문",
+        description: "직접 카드 수 선택",
+        cardCount: 3, // 기본값, 실제로는 동적으로 결정됨
+        positions: [], // 자유질문에서는 포지션 라벨 사용 안함
+        hidden: true // 스프레드 선택 메뉴에 표시하지 않음
     }
 };
 

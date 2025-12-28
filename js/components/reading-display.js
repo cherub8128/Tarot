@@ -118,6 +118,7 @@ async function renderInterpretations(container, selectedCards, spreadType, fortu
 
         // Get fortune-specific position labels
         const positionLabels = interpretation.positions?.[spreadType] || {};
+        const isOpenQuestion = spreadType === 'openQuestion';
 
         // Render card interpretations
         const cardsContainer = container.querySelector('#reading-cards');
@@ -125,8 +126,15 @@ async function renderInterpretations(container, selectedCards, spreadType, fortu
 
         for (let idx = 0; idx < selectedCards.length; idx++) {
             const card = selectedCards[idx];
-            const defaultPosition = spread.positions[idx] || `#${idx + 1}`;
-            const positionName = positionLabels[defaultPosition] || defaultPosition;
+
+            // 자유질문에서는 순서만 표시, 일반 스프레드에서는 포지션 라벨 사용
+            let positionName;
+            if (isOpenQuestion) {
+                positionName = `카드 ${idx + 1}`;
+            } else {
+                const defaultPosition = spread.positions[idx] || `#${idx + 1}`;
+                positionName = positionLabels[defaultPosition] || defaultPosition;
+            }
 
             // Get fortune-specific card meaning
             const meaning = await getCardMeaning(card, interpretation);
@@ -241,6 +249,7 @@ function createAdvice(spreadType, fortuneType) {
  */
 async function copyForAI(selectedCards, spreadType, userQuestion = '', fortuneType = 'general') {
     const spread = SPREADS[spreadType];
+    const isOpenQuestion = spreadType === 'openQuestion';
     let interpretation;
 
     try {
@@ -249,42 +258,47 @@ async function copyForAI(selectedCards, spreadType, userQuestion = '', fortuneTy
         interpretation = { meta: { name: '일반 운세' }, positions: {} };
     }
 
-    let text = `🔮 타로 리딩 결과를 해석해주세요\n\n`;
+    // 간결하고 효과적인 프롬프트 구성
+    let text = `[타로 리딩 해석 요청]\n\n`;
 
-    // Add user's question if provided
+    // 질문이 있는 경우
     if (userQuestion) {
-        text += `❓ 질문: ${userQuestion}\n\n`;
+        text += `질문: ${userQuestion}\n\n`;
     }
 
-    text += `📋 운세 타입: ${interpretation.meta?.name || fortuneType}\n`;
-    text += `📋 스프레드: ${spread.name}\n\n`;
-    text += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+    text += `운세: ${interpretation.meta?.name || fortuneType}\n`;
+    if (!isOpenQuestion) {
+        text += `스프레드: ${spread.name}\n`;
+    }
+    text += `\n---\n\n`;
 
     const positionLabels = interpretation.positions?.[spreadType] || {};
 
     for (let idx = 0; idx < selectedCards.length; idx++) {
         const card = selectedCards[idx];
-        const defaultPosition = spread.positions[idx];
-        const position = positionLabels[defaultPosition] || defaultPosition;
-        const direction = card.isReversed ? '역방향 (Reversed)' : '정방향 (Upright)';
-        const meaning = await getCardMeaning(card, interpretation);
+        const direction = card.isReversed ? '역방향' : '정방향';
 
-        text += `【${position}】\n`;
-        text += `🃏 카드: ${card.name}\n`;
-        text += `↕️ 방향: ${direction}\n`;
-        text += `💫 해석: ${meaning}\n\n`;
+        if (isOpenQuestion) {
+            // 자유질문: 카드 번호만 표시
+            text += `${idx + 1}. ${card.name} (${direction})\n`;
+        } else {
+            // 일반 스프레드: 포지션과 함께 표시
+            const defaultPosition = spread.positions[idx];
+            const position = positionLabels[defaultPosition] || defaultPosition;
+            text += `[${position}] ${card.name} (${direction})\n`;
+        }
     }
 
-    text += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+    text += `\n---\n\n`;
 
+    // 간결한 요청 사항
     if (userQuestion) {
-        text += `위 타로 리딩 결과를 바탕으로 "${userQuestion}"에 대해 답변해주세요.\n\n`;
+        text += `위 타로 결과를 바탕으로 질문에 답변해주세요.\n`;
+    } else {
+        text += `위 타로 결과를 해석해주세요.\n`;
     }
 
-    text += `요청사항:\n`;
-    text += `1. 각 카드가 ${interpretation.meta?.name || '운세'} 관점에서 가지는 의미를 설명해주세요.\n`;
-    text += `2. 카드들 사이의 연결과 전체적인 메시지를 분석해주세요.\n`;
-    text += `3. 현실적이고 실천 가능한 조언을 제공해주세요.\n`;
+    text += `각 카드의 의미와 전체 메시지를 분석하고, 실천 가능한 조언을 제공해주세요.`;
 
     try {
         await navigator.clipboard.writeText(text);

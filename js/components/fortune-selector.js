@@ -67,15 +67,19 @@ export function createFortuneSelector(callbacks) {
                     placeholder="예: 새로운 직장으로 옮기는 것이 좋을까요? / 이번 시험 결과는 어떨까요?"
                 ></textarea>
                 
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-4">
-                        <span class="text-secondary text-sm">카드 수:</span>
-                        <div class="flex gap-2">
-                            ${[1, 3, 5].map(n => `
-                                <button class="card-count-btn px-4 py-2 rounded-lg ${n === 3 ? 'active' : ''}" data-count="${n}">
-                                    ${n}장
-                                </button>
-                            `).join('')}
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center gap-4 w-full md:w-auto">
+                        <span class="text-secondary text-sm whitespace-nowrap">카드 수:</span>
+                        <div class="flex items-center gap-3 flex-1">
+                            <input 
+                                type="range" 
+                                id="card-count-slider" 
+                                min="1" 
+                                max="10" 
+                                value="3" 
+                                class="card-count-slider flex-1"
+                            >
+                            <span id="card-count-display" class="text-accent font-bold text-lg min-w-[3rem] text-center">3장</span>
                         </div>
                     </div>
                     
@@ -105,14 +109,16 @@ export function createFortuneSelector(callbacks) {
         fortuneTypesContainer.appendChild(btn);
     });
 
-    // Render spread buttons
+    // Render spread buttons (hidden 스프레드는 제외)
     const spreadGrid = container.querySelector('#spread-grid');
-    Object.entries(SPREADS).forEach(([key, spread]) => {
-        const btn = createSpreadButton(key, spread, () => {
-            callbacks.onSpreadSelect?.(key);
+    Object.entries(SPREADS)
+        .filter(([key, spread]) => !spread.hidden)
+        .forEach(([key, spread]) => {
+            const btn = createSpreadButton(key, spread, () => {
+                callbacks.onSpreadSelect?.(key);
+            });
+            spreadGrid.appendChild(btn);
         });
-        spreadGrid.appendChild(btn);
-    });
 
     // Mode button handlers
     container.querySelector('#mode-spread').addEventListener('click', () => {
@@ -127,20 +133,18 @@ export function createFortuneSelector(callbacks) {
         callbacks.onModeSelect?.('openQuestion');
     });
 
-    // Card count buttons
-    container.querySelectorAll('.card-count-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            container.querySelectorAll('.card-count-btn').forEach(b => {
-                b.classList.remove('active');
-            });
-            btn.classList.add('active');
-        });
+    // Card count slider
+    const slider = container.querySelector('#card-count-slider');
+    const countDisplay = container.querySelector('#card-count-display');
+
+    slider.addEventListener('input', () => {
+        countDisplay.textContent = `${slider.value}장`;
     });
 
     // Start open reading
     container.querySelector('#start-open-reading').addEventListener('click', () => {
         const question = container.querySelector('#open-question-input').value.trim();
-        const cardCount = parseInt(container.querySelector('.card-count-btn.active').dataset.count);
+        const cardCount = parseInt(slider.value);
         callbacks.onOpenQuestion?.(question, cardCount);
     });
 

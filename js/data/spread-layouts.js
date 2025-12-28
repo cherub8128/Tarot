@@ -72,32 +72,10 @@ export const SPREAD_LAYOUTS = {
         ]
     },
 
-    // Open question fallback spreads
-    open1: {
-        type: 'simple',
-        positions: [
-            { row: 1, col: 1, label: '답변' }
-        ]
-    },
-
-    open3: {
+    // 자유질문 모드용 - 카드 수에 따라 동적으로 레이아웃 생성
+    openQuestion: {
         type: 'horizontal',
-        positions: [
-            { row: 1, col: 1, label: '상황' },
-            { row: 1, col: 2, label: '조언' },
-            { row: 1, col: 3, label: '결과' }
-        ]
-    },
-
-    open5: {
-        type: 'cross',
-        positions: [
-            { row: 2, col: 2, label: '핵심' },
-            { row: 1, col: 2, label: '위' },
-            { row: 3, col: 2, label: '아래' },
-            { row: 2, col: 1, label: '과거' },
-            { row: 2, col: 3, label: '미래' }
-        ]
+        positions: [] // 자유질문에서는 포지션 라벨 사용 안함
     }
 };
 

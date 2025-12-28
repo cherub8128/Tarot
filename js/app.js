@@ -170,7 +170,7 @@ class TarotApp {
             onOpenQuestion: (question, cardCount) => {
                 this.settings.openQuestion = question;
                 this.settings.cardCount = cardCount;
-                this.settings.selectedSpread = `open${cardCount}`;
+                this.settings.selectedSpread = 'openQuestion';
                 appState.set({ userQuestion: question });
                 this._startReading();
             }

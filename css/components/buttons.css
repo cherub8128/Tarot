@@ -194,3 +194,46 @@
     font-size: 0.75rem;
     color: var(--theme-text-secondary);
 }
+
+/* Card Count Slider */
+.card-count-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 8px;
+    background: var(--theme-bg-secondary);
+    border-radius: var(--radius-full);
+    outline: none;
+    transition: background var(--transition-default);
+    border: 1px solid var(--theme-border);
+}
+
+.card-count-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    background: var(--theme-accent-primary);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: transform var(--transition-default), box-shadow var(--transition-default);
+}
+
+.card-count-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(var(--theme-accent-primary-rgb), 0.4);
+}
+
+.card-count-slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    background: var(--theme-accent-primary);
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.card-count-slider::-moz-range-thumb:hover {
+    transform: scale(1.1);
+}
